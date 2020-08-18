@@ -97,6 +97,103 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
+        self.scan_right()
+        self.scan_left()
+        self.sort_check()
+
+        while self.light_is_on() is False:
+            self.sort()
+
+        return self._list
+
+    def scan_right(self):
+        self.swap_item()
+        self.move_right()
+        while self.can_move_right() is True:
+            if self.compare_item() == 1:
+                self.move_right()
+            elif self.compare_item() == -1:
+                self.swap_item()
+                self.move_right()
+            else:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_right()
+
+        if self.can_move_right() is False:
+            if self.compare_item() == 1:
+                self.swap_item()
+            else:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+    def scan_left(self):
+        self.move_left()
+        while self.can_move_left() is True:
+            if self.compare_item() == -1:
+                self.move_left()
+            elif self.compare_item() == 1:
+                self.swap_item()
+                self.move_left()
+            else:
+                self.move_left()
+
+        if self.can_move_left() is False:
+            if self.compare_item() == 0:
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+            elif self.compare_item() is None:
+                self.swap_item()
+
+    def sort_check(self):
+        while self.can_move_left() is True:
+            self.move_left()
+        self.swap_item()
+        self.move_right()
+        self.set_light_on()
+        while self.can_move_right() is True:
+            if self.compare_item() == -1:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_right()
+
+            elif self.compare_item() == 0:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+                self.swap_item()
+                self.move_right()
+
+            elif self.compare_item() == 1:
+                self.move_left()
+                self.swap_item()
+                self.set_light_off()
+                break
+
+        if self.can_move_right() is False:
+            if self.compare_item() == -1:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            elif self.compare_item() == 1:
+                self.set_light_off()
+            elif self.compare_item() == 0:
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+        while self.can_move_left() is True:
+            self.move_left()
+
+        if self.can_move_left() is False:
+            return
+
         pass
 
 
