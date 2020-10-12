@@ -23,4 +23,4 @@ Drop an egg off of floor n // 2 (n1);
 if it breaks, f is below n1. If it doesn't break, f is above n1.
 continue dropping eggs from the midpoint of nk and the current floor or ceiling (nprev)
 until f is reached; this will lead to ~ k/2 eggs broken, with f found in k steps.
-runtime complexity is O(log n)
+runtime complexity is O(log n))
